@@ -7,3 +7,19 @@
 	width: 200px;
 	height: 50px;
 }
+
+.tomatoTimer {
+	display: flex;
+}
+
+.percentage {
+	height: 0px;
+}
+.percentContainer{
+	width: 1000px;
+	border-bottom: solid red 10px;
+}
+.percentContent{
+	width: 0%;
+	border-top: solid green 10px;
+}
