@@ -2,7 +2,7 @@
 	var app = {
 		intervalID: null,
 		startTimer: 1500,
-		currentTimer: 1500,
+		currentTimer: app.startTimer,
 		init: function(){
 			app.listeners();
 		},
@@ -22,6 +22,9 @@
 			app.intervalID = setInterval(function(){
 				app.currentTimer--;
 				app.updateView();
+				if (currentTimer < 0){
+					app.stop();
+				}
 			}, 1000);
 		},
 		updateTimer: function(){
