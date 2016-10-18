@@ -3,30 +3,42 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Tomato Timer</title>
+	<link rel="stylesheet" href="semantic/semantic.css">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<div class="bodyPercent ui container"></div>
 
-	<h1>Tomato Timer</h1>
-	<button id="tomato">Working Session</button>
-	<button id="shortBreak">Short Break</button>
-	<button id="longBreak">Long Break</button>
-
-	<div class="tomatoTimer">
-		<div class="countdown">
-			<span id="minutes"></span>
-			<span> : </span>
-			<span id="seconds"></span>
+	<div class="blockPomodoro ui container">
+		<h1 class="ui centered header">Tomato Timer</h1>
+		<div class="ui centered grid">
+			<button id="tomato" class="ui primary button">Working Session</button>
+			<button id="shortBreak" class="ui primary button">Short Break</button>
+			<button id="longBreak" class="ui primary button">Long Break</button>
 		</div>
 		
-		<div class="percentage percentContainer">
-			<div class="percentage percentContent"></div>
+		<div class=" ui cenntered grid tomatoTimer">
+			<div class="ui row">
+				<div class="countdown ui five wide centered center aligned column">
+					<span id="minutes"></span>
+					<span id="doublePoint"></span>
+					<span id="seconds"></span>
+				</div>
+			</div>
+			
+			<div class="ui centered row">
+				<div class="percentage percentContainer">
+					<div class="percentage percentContent"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="ui centered grid">
+			<button id="start" class="ui green button">Start</button>
+			<button id="stop" class="ui red button">Stop</button>
+			<button id="reset" class="ui button">Reset</button>
 		</div>
 	</div>
-
-	<button id="start">Start</button>
-	<button id="stop">Stop</button>
-	<button id="reset">Reset</button>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="app.js"></script>	
