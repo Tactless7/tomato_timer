@@ -61,7 +61,7 @@
 			$('#playVideo').html('');
 		},
 		shortBreak: function(){
-			this.startTimer = 3;
+			this.startTimer = 300;
 			this.updateTimer();
 			this.updateView();
 			$('#playVideo').html('');
