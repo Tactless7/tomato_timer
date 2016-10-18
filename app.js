@@ -21,10 +21,12 @@
 			var that = this;
 			this.intervalID = setInterval(function(){
 				that.updateView();
-				that.currentTimer--;
 				that.percentBar();
+				that.currentTimer--;
 				if (that.currentTimer < 0){
 					that.stop();
+					$('#playVideo').html('<iframe width="896" height="480" src="http://www.youtube.com/embed/zEvl44Auv6Y?start=6&autoplay=1" frameborder="0" allowfullscreen></iframe>')
+					$('iframe').addClass('playVideo');
 				}
 			}, 1000);
 		},
@@ -39,28 +41,36 @@
 		start: function(){
 			this.stop();
 			this.decrement();
+			if(this.currentTimer >=0){
+				$('#playVideo').html('');
+			}
 		},
 		stop: function(){
 			clearInterval(app.intervalID);
+			$('#playVideo').html('');
 		},
 		reset: function(){
 			this.updateTimer();
 			this.updateView();
+			$('#playVideo').html('');
 		},
 		tomato: function(){
 			this.startTimer = 1500;
 			this.updateTimer();
 			this.updateView();
+			$('#playVideo').html('');
 		},
 		shortBreak: function(){
-			this.startTimer = 300;
+			this.startTimer = 3;
 			this.updateTimer();
 			this.updateView();
+			$('#playVideo').html('');
 		},
 		longBreak: function(){
 			this.startTimer = 600;
 			this.updateTimer();
 			this.updateView();
+			$('#playVideo').html('');
 		},
 		addZero: function(number){
 			if(number < 10){

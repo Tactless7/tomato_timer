@@ -7,38 +7,48 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="bodyPercent ui container"></div>
+	<div class="bodyPercent">
+	</div>
+	<div id="playVideo" class="ui centered grid"></div>
+
 
 	<div class="blockPomodoro ui container">
-		<h1 class="ui centered header">Tomato Timer</h1>
-		<div class="ui centered grid">
-			<button id="tomato" class="ui primary button">Working Session</button>
-			<button id="shortBreak" class="ui primary button">Short Break</button>
-			<button id="longBreak" class="ui primary button">Long Break</button>
-		</div>
-		
-		<div class=" ui cenntered grid tomatoTimer">
-			<div class="ui row">
-				<div class="countdown ui five wide centered center aligned column">
-					<span id="minutes"></span>
-					<span id="doublePoint"></span>
-					<span id="seconds"></span>
-				</div>
+		<div class="ui centered very padded segment grid">
+			<div class="ui centered row">
+				<h1 class="ui centered header">Tomato Timer</h1>
+			</div>
+			<div class="ui centered row">
+				<button id="tomato" class="ui big primary button">Working Session</button>
+				<button id="shortBreak" class="ui big primary button">Short Break</button>
+				<button id="longBreak" class="ui big primary button">Long Break</button>
 			</div>
 			
-			<div class="ui centered row">
+			<div class=" ui centered row tomatoTimer">
+				<div class="ui row">
+					<div class="countdown ui nine wide centered center aligned column">
+						<span id="minutes"></span>
+						<span id="doublePoint"></span>
+						<span id="seconds"></span>
+					</div>
+				</div>
+			</div>
+				
+			<div class="ui very marged row">
 				<div class="percentage percentContainer">
 					<div class="percentage percentContent"></div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="ui centered grid">
-			<button id="start" class="ui green button">Start</button>
-			<button id="stop" class="ui red button">Stop</button>
-			<button id="reset" class="ui button">Reset</button>
+			
+			<div class="ui centered grid">
+				<div class="ui very padded row">
+					<button id="start" class="ui big green button">Start</button>
+					<button id="stop" class="ui big red button">Stop</button>
+					<button id="reset" class="ui big button">Reset</button>
+				</div>
+			</div>
 		</div>
 	</div>
+
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="app.js"></script>	
