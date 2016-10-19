@@ -1,9 +1,10 @@
-'use strict';
 (function(){
+'use strict';
 	var app = {
 		intervalID: null,
 		startTimer: 1500,
 		currentTimer: null,
+		state: 'tomato',
 		init: function(){
 			this.listeners();
 			this.updateTimer();
@@ -18,21 +19,20 @@
 			$('#tomato').on('click', this.tomato.bind(this));
 		},
 		decrement: function(){
-			var that = this;
+			var self = this;
 			this.intervalID = setInterval(function(){
-				that.updateView();
-				that.percentBar();
-				that.currentTimer--;
-				if (that.currentTimer < 0){
-					that.stop();
-					$('#playVideo').html('<iframe width="896" height="480" src="http://www.youtube.com/embed/zEvl44Auv6Y?start=6&autoplay=1" frameborder="0" allowfullscreen></iframe>')
-					$('iframe').addClass('playVideo');
+				self.updateView();
+				self.percentBar();
+				self.currentTimer--;
+				if (self.currentTimer < 0){
+					self.stop();
+					self.currentState();
 				}
 			}, 1000);
 		},
 		updateView: function(){
 			$('#minutes').html(this.addZero(Math.floor(this.currentTimer / 60)));
-			$('#doublePoint').html(' : ');
+			$('#doublePoint').html(':');
 			$('#seconds').html( this.addZero(this.currentTimer % 60));
 		},
 		updateTimer: function(){
@@ -41,36 +41,31 @@
 		start: function(){
 			this.stop();
 			this.decrement();
-			if(this.currentTimer >=0){
-				$('#playVideo').html('');
-			}
 		},
 		stop: function(){
 			clearInterval(app.intervalID);
-			$('#playVideo').html('');
 		},
 		reset: function(){
 			this.updateTimer();
 			this.updateView();
-			$('#playVideo').html('');
 		},
 		tomato: function(){
+			this.state = 'tomato';
 			this.startTimer = 1500;
 			this.updateTimer();
 			this.updateView();
-			$('#playVideo').html('');
 		},
 		shortBreak: function(){
+			this.state = 'shortBreak';
 			this.startTimer = 300;
 			this.updateTimer();
 			this.updateView();
-			$('#playVideo').html('');
 		},
 		longBreak: function(){
+			this.state = 'longBreak';
 			this.startTimer = 600;
 			this.updateTimer();
 			this.updateView();
-			$('#playVideo').html('');
 		},
 		addZero: function(number){
 			if(number < 10){
@@ -82,6 +77,54 @@
 			var percent = (this.startTimer - this.currentTimer) * 100 / this.startTimer;
 			$('.percentContent').css('width', percent + '%');
 			$('.bodyPercent').css('height', percent + '%');
+		},
+		currentState: function(){
+			if (this.state === 'tomato'){
+				this.successPomodoro();
+			}
+			else {
+				this.breakEnd();
+			}
+		},
+		successPomodoro: function(){
+			var self = this;
+			swal({
+				title: 'You made it !',
+				text: 'You worked a full session',
+				type: 'success',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'Short Break',
+				confirmButtonClass: 'swalShortBreak',
+				cancelButtonColor: '#3085d6',
+				cancelButtonText: 'Long Break',
+				cancelButtonClass: 'swalLongBreak',
+				buttonsStyling : true
+			}).then(function(){
+				self.shortBreak();
+				self.start();
+			}, function(dismiss) {
+				if(dismiss === 'cancel'){
+					self.longBreak();
+					self.start();
+				}
+			})
+		},
+		breakEnd: function(){
+			var self = this;
+			swal({
+				title: 'Break End !',
+				text: 'Let\'s have another working session',
+				type: 'warning',
+				showCancelButton: false,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'Back to Business',
+				confirmButtonClass: 'swalTomato',
+				buttonsStyling: true
+			}).then(function(){
+				self.tomato();
+				self.start();
+			})
 		}
 	};
 	app.init();
