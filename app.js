@@ -1,14 +1,18 @@
 (function(){
-'use strict';
+	'use strict';
 	var app = {
+		deadline: null,
+		actualDate: null,
+		sessionTimer: 10000;
 		intervalID: null,
-		startTimer: 1500,
+		startTimer: 10000,
 		currentTimer: null,
 		state: 'tomato',
 		init: function(){
 			this.listeners();
 			this.updateTimer();
 			this.updateView();
+			this.getDate();
 		},
 		listeners: function(){
 			$('#start').on('click', this.start.bind(this));
@@ -17,6 +21,18 @@
 			$('#shortBreak').on('click', this.shortBreak.bind(this));
 			$('#longBreak').on('click', this.longBreak.bind(this));
 			$('#tomato').on('click', this.tomato.bind(this));
+		},
+		getDate: function(){
+			this.actualDate = Date.now();
+			console.log(this.actualDate);
+			this.deadline = this.actualDate + this.sessionTimer;
+			console.log(this.deadline);
+			var minutes = Math.floor(this.sessionTimer / 60000)
+			var seconds = Math.floor((this.sessionTimer % 60000 / 1000);
+			var milsec = this.sessionTimer % 60000 % 1000;
+		},
+		remainingTime: function(){
+
 		},
 		decrement: function(){
 			var self = this;
