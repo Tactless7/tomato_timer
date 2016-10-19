@@ -3,16 +3,15 @@
 	var app = {
 		deadline: null,
 		actualDate: null,
-		sessionTimer: 10000;
+		sessionTimer: 10000,
 		intervalID: null,
 		startTimer: 10000,
 		currentTimer: null,
 		state: 'tomato',
 		init: function(){
 			this.listeners();
-			this.updateTimer();
+			// this.updateTimer();
 			this.updateView();
-			this.getDate();
 		},
 		listeners: function(){
 			$('#start').on('click', this.start.bind(this));
@@ -24,38 +23,45 @@
 		},
 		getDate: function(){
 			this.actualDate = Date.now();
-			console.log(this.actualDate);
 			this.deadline = this.actualDate + this.sessionTimer;
-			console.log(this.deadline);
-			var minutes = Math.floor(this.sessionTimer / 60000)
-			var seconds = Math.floor((this.sessionTimer % 60000 / 1000);
-			var milsec = this.sessionTimer % 60000 % 1000;
 		},
-		remainingTime: function(){
-
+		getRemainingTime: function(){
+			var remainingTime = this.deadline - Date.now();
+			var minutes = Math.floor(this.sessionTimer / 60000)
+			var seconds = Math.floor((this.sessionTimer % 60000 / 1000));
+			var milSec = this.sessionTimer % 60000 % 1000;
+			return {
+				totalMilSec: remainingTime,
+				minutes: minutes,
+				seconds: seconds,
+				milSec: milSec
+			}
 		},
 		decrement: function(){
 			var self = this;
 			this.intervalID = setInterval(function(){
 				self.updateView();
 				self.percentBar();
-				self.currentTimer--;
-				if (self.currentTimer < 0){
-					self.stop();
-					self.currentState();
-				}
-			}, 1000);
+				// self.currentTimer--;
+				// if (self.currentTimer < 0){
+				// 	self.stop();
+				// 	self.currentState();
+				// }
+			}, 100);
 		},
 		updateView: function(){
-			$('#minutes').html(this.addZero(Math.floor(this.currentTimer / 60)));
-			$('#doublePoint').html(':');
-			$('#seconds').html( this.addZero(this.currentTimer % 60));
+			var remaining = this.getRemainingTime();
+			$('#minutes').html(this.addZero(remaining.minutes));
+			$('.doublePoint').html(':');
+			$('#seconds').html(this.addZero(remaining.seconds));
+			$('#milSec').html(this.addZero(remaining.milSec));
 		},
 		updateTimer: function(){
 			this.currentTimer = this.startTimer;
 		},
 		start: function(){
-			this.stop();
+			// this.stop();
+			this.getDate();
 			this.decrement();
 		},
 		stop: function(){
