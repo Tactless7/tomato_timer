@@ -3,17 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Tomato Timer</title>
-	<link rel="stylesheet" href="semantic/semantic.css">
+	<link rel="stylesheet" href="semantic/dist/semantic.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/5.3.4/sweetalert2.min.css">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<div class="bodyPercent">
 	</div>
-	<div id="playVideo" class="ui centered grid"></div>
-
 
 	<div class="blockPomodoro ui container">
-		<div class="ui centered very padded segment grid">
+		<div class="ui centered padded piled segment grid">
 			<div class="ui centered row">
 				<h1 class="ui centered header">Tomato Timer</h1>
 			</div>
@@ -43,7 +42,7 @@
 				<div class="ui very padded row">
 					<button id="start" class="ui big green button">Start</button>
 					<button id="stop" class="ui big red button">Stop</button>
-					<button id="reset" class="ui big button">Reset</button>
+					<button id="reset" class="ui big grey button">Reset</button>
 				</div>
 			</div>
 		</div>
@@ -51,6 +50,7 @@
 
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/sweetalert2/5.3.4/sweetalert2.min.js"></script>
 	<script src="app.js"></script>	
 </body>
 </html>
